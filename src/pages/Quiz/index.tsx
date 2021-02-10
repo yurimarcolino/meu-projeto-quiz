@@ -1,19 +1,23 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '../../components/Button';
 import { Img } from '../../components/Image';
 import { RootStackParamList } from '../../routes/AppStack';
 import { Alternative } from '../../components/Alternative';
 import { Container, Title } from './styles';
 import { Alternative as AlternativeModel } from '../../models/question';
-import { View } from 'react-native';
 import { ButtonGroup } from '../../components/Button/styles';
+import { Timer } from '../../components/Timer';
+
+interface SelectItem {
+  [x: number] : number;
+}
 
 type QuizProps = StackScreenProps<RootStackParamList, 'Quiz'>
 
 export const Quiz: React.FC<QuizProps> = ({ route, navigation }) => {
   const [answers, setAnswers] = useState<AlternativeModel[]>([]);
-  const [selectIndex, setSelectIndex] = useState<number>();
+  const [selectedAnswer, setSelectedAnswer] = useState<SelectItem>({});
   const [index, setIndex] = useState<number>(0);
   const { questions } = route.params
 
@@ -27,7 +31,6 @@ export const Quiz: React.FC<QuizProps> = ({ route, navigation }) => {
 
   function finishQuiz(){
     navigation.navigate('Result',{
-      questions,
       answers
     })
   }
@@ -38,18 +41,27 @@ export const Quiz: React.FC<QuizProps> = ({ route, navigation }) => {
 
   function handleSelectAnswer(alternative: AlternativeModel, alternativeIndex: number){
     const newAnswers = [...answers];
+
     newAnswers[index] = alternative;
+
     setAnswers(newAnswers);
-    setSelectIndex(alternativeIndex);
+
+    const answer =  {
+      [index]: alternativeIndex
+    }
+    if (selectedAnswer) {
+      setSelectedAnswer({...selectedAnswer, ...answer});
+    }
   }
 
   return(
     <Container>
+      <Timer/>
       <Img source={{uri: `https://picsum.photos/id/${index}/200/300`}}/>
       <Title>{question.question}</Title>
       {question.alternatives.map((alternative, alternativeIndex) => {
         return <Alternative
-          selected={alternativeIndex === selectIndex}
+          selected={selectedAnswer[index] === alternativeIndex}
           onPress={() => handleSelectAnswer(alternative, alternativeIndex)}
           key={alternative.content}>{alternative.content}
         </Alternative>

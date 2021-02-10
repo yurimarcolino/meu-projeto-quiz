@@ -16,7 +16,6 @@ export type RootStackParamList = {
     questions: Question[]
   }
   Result: {
-    questions: Question[],
     answers: Alternative[]
   }
 }
