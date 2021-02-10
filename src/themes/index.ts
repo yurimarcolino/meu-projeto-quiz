@@ -1,5 +1,15 @@
-export const primary = '#673AB7';
+import { createGlobalStyle } from "styled-components";
 
-export const secondary = '#4CAF50';
+export const primary = '#312e38';
 
-export const white = '#FFF';
+export const secondary = '#ff9000';
+
+export const white = '#f4ede8';
+
+// export const GlobalStyle = createGlobalStyle`
+//   body {
+//     margin: 0;
+//     padding: 0;
+//     background-color: ${primary};
+//   }
+// `

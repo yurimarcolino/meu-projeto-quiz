@@ -1,24 +1,26 @@
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { Text, View } from 'react-native'
-import { Button } from '../components/Button'
-import { Alternative, Question } from '../models/question';
-import { triviaApi } from '../services/api';
-import { TriviaApiResponse } from '../services/trivia-api-response'
+import { Button } from '../../components/Button'
+import { Alternative } from '../../models/question';
+import { triviaApi } from '../../services/api';
+import { TriviaApiResponse } from '../../services/trivia-api-response'
+
+import { Container, Text, Title } from './styles'
 
 
-export const Home: React.FC<Question[]> = () => {
+export const Home: React.FC = () => {
+  const [answer, setAnswer] = useState();
   const navigation = useNavigation();
 
-   async function loadQuestions(){
+  async function loadQuestions(){
     // TODO: create trivia api response
-    const { data: quiz } = await triviaApi.get<TriviaApiResponse>('api.php?amount=15&category=15&difficulty=easy&type=multiple')
+    const { data: quiz } = await triviaApi.get<TriviaApiResponse>('api.php?amount=3&category=15&difficulty=easy&type=multiple')
     return convertToQuestions(quiz)
   }
 
   function convertToQuestions(quiz: TriviaApiResponse){
     return quiz.results.map(result => {
-      const incorrectAnswer : Alternative[] = result.incorrect_answers.map(incorrect =>{
+      const incorrectAnswer : Alternative[] = result.incorrect_answers.map(incorrect => {
         return {
           content: incorrect,
           isCorrect: false
@@ -29,7 +31,6 @@ export const Home: React.FC<Question[]> = () => {
         isCorrect: true
       }
       return {
-        image: 'https://picsum.photos/200/300?random=1',
         question: result.question,
         alternatives: [
           ...incorrectAnswer,
@@ -51,11 +52,11 @@ export const Home: React.FC<Question[]> = () => {
   }
 
   return(
-    <View>
-      <Text>Quiz</Text>
+    <Container>
+      <Title>Quiz</Title>
       <Text>Desc do quiz</Text>
-      <Button onClick={navigateToQuiz}>Start Quiz</Button>
-    </View>
+      <Button onPress={navigateToQuiz}>Start</Button>
+    </Container>
   )
 
 }

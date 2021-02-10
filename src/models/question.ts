@@ -4,7 +4,6 @@ export interface Alternative {
 }
 
 export interface Question {
-  image: string,
   question: string
   alternatives: Alternative[],
 }

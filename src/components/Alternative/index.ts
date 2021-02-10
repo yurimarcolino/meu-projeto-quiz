@@ -1,13 +1,19 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { lighten } from 'polished';
-import { secondary, white } from '../../themes'
+import { primary, white } from '../../themes'
 
-export const Alternative = styled.div`
-  display: flex;
-  border: 2px solid ${lighten(0.2, secondary)};
+interface CustomAlternativeProps {
+  selected: boolean
+}
+
+export const Alternative = styled.Text<CustomAlternativeProps>`
+  border: 2px solid ${lighten(0.2, primary)};
   border-radius: 5px;
-  padding: 8px;
   color: ${white};
-  background-color: ${secondary};
-  margin: 8px;
+  background-color: ${props => props.selected ? lighten(0.2, primary) : lighten(0.1, primary) };
+  align-items: center;
+
+  padding: 8px;
+  margin: 5px;
+  width: 100%;
 `

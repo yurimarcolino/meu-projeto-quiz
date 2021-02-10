@@ -1,20 +1,24 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { Home } from '../screens/Home';
-import { Quiz } from '../screens/Quiz';
-import { Result } from '../screens/Result';
+import { Home } from '../pages/Home'
+import { Quiz } from '../pages/Quiz';
+import { Result } from '../pages/Result';
 
-import { Question } from '../models/question';
+import { Alternative, Question } from '../models/question';
 
 export type RootStackParamList = {
   Home: undefined,
   Quiz: {
     questions: Question[]
   }
-  Result: undefined
+  Result: {
+    questions: Question[],
+    answers: Alternative[]
+  }
 }
 
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
@@ -28,5 +32,5 @@ export const AppStack = () => {
         <Screen name="Result" component={Result}></Screen>
       </Navigator>
     </NavigationContainer>
-  )
+)
 }
