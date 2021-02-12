@@ -16,9 +16,9 @@ export const Title = styled.Text`
 `
 
 export const Text = styled.Text`
-  font-size: 20px;
+  font-size: 15px;
   color: ${white};
-  margin-left: 20px;
+  margin-left: 45px;
   margin-right: 20px;
   margin-bottom: 150px;
 

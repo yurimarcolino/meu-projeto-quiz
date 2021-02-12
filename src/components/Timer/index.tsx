@@ -17,9 +17,7 @@ export const Timer: React.FC = () => {
         setTime(time - 1)
       }else{
         clearTimeout(timer);
-        navigation.navigate('Result',{
-          answer: []
-        })
+        navigation.navigate('Result')
       }
     }, 1000);
     return () => clearTimeout(timer);

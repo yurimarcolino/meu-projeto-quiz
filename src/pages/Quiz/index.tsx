@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
 import { Img } from '../../components/Image';
 import { Alternative } from '../../components/Alternative';
-import { Container, Title } from './styles';
 import { Alternative as AlternativeModel, Question } from '../../models/question';
 import { ButtonGroup } from '../../components/Button/styles';
 import { Timer } from '../../components/Timer';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { loadQuestions } from '../../services/questions.service';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { answerQuestion, RootState } from '../../store';
+import { Container, Title } from './styles';
 
 interface SelectItem {
   [x: number] : number;
@@ -18,8 +21,13 @@ interface SelectItem {
 export const Quiz: React.FC = () => {
   const navigation = useNavigation();
 
+  const dispatch = useDispatch();
+  const answers = useSelector((state : RootState) => {
+    console.log(state);
+    return state.quiz.answers;
+  });
+
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [answers, setAnswers] = useState<AlternativeModel[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<SelectItem>({});
   const [index, setIndex] = useState<number>(0);
 
@@ -45,15 +53,12 @@ export const Quiz: React.FC = () => {
   function finishQuiz(){
     navigation.navigate('Result',{
       answers
-    })
+    });
   }
-  //duvida nessa funcao sobre a relacao entre os index
+
   function handleSelectAnswer(alternative: AlternativeModel, alternativeIndex: number){
-    const newAnswers = [...answers];
-
-    newAnswers[index] = alternative;
-
-    setAnswers(newAnswers);
+    console.log('index1',index);
+    dispatch(answerQuestion(alternative, index));
 
     const answer =  {
       [index]: alternativeIndex
@@ -65,10 +70,11 @@ export const Quiz: React.FC = () => {
 
   if(!question){
     return(
-      <View>Loading...</View>
+      <View>
+        <Text>Loading...</Text>
+      </View>
     )
   }
-
   return(
     <View>
       <Timer/>

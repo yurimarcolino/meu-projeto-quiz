@@ -1,20 +1,19 @@
-import { StackScreenProps } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-
 import { Button } from '../../components/Button';
-import { RootStackParamList } from '../../routes/AppStack';
-
 import { Text, AssertionText, Container, InfoContainer} from './styles';
 
-type ResultProps = StackScreenProps<RootStackParamList, 'Result'>
+import { useDispatch, useSelector } from 'react-redux'
+import { clearAnswers, RootState } from '../../store';
 
-export const Result: React.FC<ResultProps> = ({route, navigation}) => {
-  const { answers } = route.params;
-
-  //esclarecer duvida sobre correct answer
+export const Result: React.FC = () => {
+  const dispatch = useDispatch();
+  const answers = useSelector((state : RootState) => state.quiz.answers);
+  const navigation = useNavigation();
   const correctAnswers = answers?.filter(answer => answer.isCorrect)?.length;
 
   function navigateToHome(){
+    dispatch(clearAnswers)
     navigation.navigate('Home');
   }
 

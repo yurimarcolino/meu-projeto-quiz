@@ -8,14 +8,16 @@ import { Home } from '../pages/Home'
 import { Quiz } from '../pages/Quiz';
 import { Result } from '../pages/Result';
 
-import { Alternative, Question } from '../models/question';
+/*
+To get params into a component
+
+type ResultProps = StackScreenProps<RootStackParamList, 'Result'>
+*/
 
 export type RootStackParamList = {
   Home: undefined,
   Quiz: undefined,
-  Result: {
-    answers: Alternative[]
-  }
+  Result: undefined
 }
 
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();

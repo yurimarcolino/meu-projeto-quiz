@@ -14,7 +14,10 @@ export const Home: React.FC = () => {
   return(
     <Container>
       <Title>My Quiz</Title>
-      <Text>You're going to have 10 minutes to answer 15 questions about computer science. </Text>
+      <Text textBreakStrategy='balanced'>
+        You're going to have 10 minutes to answer 15 questions about computer
+        science. You can't finish the quiz without answer at least 1 question.
+      </Text>
       <Button onPress={navigateToQuiz}>Start</Button>
     </Container>
   )
