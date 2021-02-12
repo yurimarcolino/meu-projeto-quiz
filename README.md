@@ -1,4 +1,4 @@
-# meu-projeto-quiz
+# Desafio empresa Octupus
 
 ## How to run the project: 
 
@@ -24,7 +24,7 @@ yarn && yarn start
 
 This page is just the entry point, we won't have anything especial, basically, some instructions for the user and a button to start the game.
 
-### Quiz
+### Quiz Page
 
 This is the core of the entirely application. You're going to be able to : 
   - anserwer the questions.
@@ -36,7 +36,7 @@ This is the core of the entirely application. You're going to be able to :
   *Note: You're going to have 10 minutes to finish 15 questions. If time is over you'll be redirected to the result page.*
   
   
-### Result 
+### Result Page
   In the result page you're going to be able to see how many ansewrs you scored and also a button to restart the game.
   
 
