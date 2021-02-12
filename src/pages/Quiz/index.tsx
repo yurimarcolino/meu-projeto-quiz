@@ -1,26 +1,34 @@
-import { StackScreenProps } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
 import { Img } from '../../components/Image';
-import { RootStackParamList } from '../../routes/AppStack';
 import { Alternative } from '../../components/Alternative';
 import { Container, Title } from './styles';
-import { Alternative as AlternativeModel } from '../../models/question';
+import { Alternative as AlternativeModel, Question } from '../../models/question';
 import { ButtonGroup } from '../../components/Button/styles';
 import { Timer } from '../../components/Timer';
 import { View } from 'react-native';
+
+import { loadQuestions } from '../../services/questions.service';
+import { useNavigation } from '@react-navigation/native';
 
 interface SelectItem {
   [x: number] : number;
 }
 
-type QuizProps = StackScreenProps<RootStackParamList, 'Quiz'>
+export const Quiz: React.FC = () => {
+  const navigation = useNavigation();
 
-export const Quiz: React.FC<QuizProps> = ({ route, navigation }) => {
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<AlternativeModel[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<SelectItem>({});
   const [index, setIndex] = useState<number>(0);
-  const { questions } = route.params;
+
+  useEffect(() => {
+    (async function(){
+      const questions = await loadQuestions();
+      setQuestions(questions);
+    })()
+  },[]);
 
   const question = questions[index];
 
@@ -53,6 +61,12 @@ export const Quiz: React.FC<QuizProps> = ({ route, navigation }) => {
     if (selectedAnswer) {
       setSelectedAnswer({...selectedAnswer, ...answer});
     }
+  }
+
+  if(!question){
+    return(
+      <View>Loading...</View>
+    )
   }
 
   return(

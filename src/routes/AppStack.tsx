@@ -12,9 +12,7 @@ import { Alternative, Question } from '../models/question';
 
 export type RootStackParamList = {
   Home: undefined,
-  Quiz: {
-    questions: Question[]
-  }
+  Quiz: undefined,
   Result: {
     answers: Alternative[]
   }

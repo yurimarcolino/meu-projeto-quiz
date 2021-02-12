@@ -1,4 +1,5 @@
 {
+  "license": "",
   "main": "node_modules/expo/AppEntry.js",
   "husky": {
     "hooks": {
@@ -6,7 +7,7 @@
     }
   },
   "scripts": {
-    "fixeslint": "echo 1",
+    "fixeslint": "yarn eslint --ext .ts,.tsx --fix-dry-run",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
