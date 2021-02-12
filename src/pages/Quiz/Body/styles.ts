@@ -15,6 +15,5 @@ export const Title = styled.Text`
   font-size: 16px;
   font-weight: bold;
   text-align: justify;
-  text-justify: inter-word;
 `
 

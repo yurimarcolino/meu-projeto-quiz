@@ -22,5 +22,4 @@ export const Text = styled.Text`
   margin-right: 20px;
   margin-bottom: 150px;
   text-align: justify;
-  text-justify: inter-word;
 `
