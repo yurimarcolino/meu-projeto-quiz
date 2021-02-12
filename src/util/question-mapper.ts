@@ -23,7 +23,7 @@ export function convertToQuestions(quiz: TriviaApiResponse){
           correctAnswer,
           {
             //just to complete 5 answers in the requirement.
-            content: 'None of then',
+            content: 'None of them',
             isCorrect: false
           }
         ]
