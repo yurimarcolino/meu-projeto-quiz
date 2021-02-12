@@ -4,16 +4,18 @@ import { Button } from '../../components/Button';
 import { Text, AssertionText, Container, InfoContainer} from './styles';
 
 import { useDispatch, useSelector } from 'react-redux'
-import { clearAnswers, RootState } from '../../store';
+import { RootState } from '../../redux/store';
+import { clearAnswers } from '../../redux/quiz-slice/actions';
 
 export const Result: React.FC = () => {
   const dispatch = useDispatch();
   const answers = useSelector((state : RootState) => state.quiz.answers);
+  console.log(answers);
   const navigation = useNavigation();
   const correctAnswers = answers?.filter(answer => answer.isCorrect)?.length;
 
   function navigateToHome(){
-    dispatch(clearAnswers)
+    dispatch(clearAnswers());
     navigation.navigate('Home');
   }
 

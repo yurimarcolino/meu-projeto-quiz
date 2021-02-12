@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
 import { Img } from '../../components/Image';
 import { Alternative } from '../../components/Alternative';
-import { Alternative as AlternativeModel, Question } from '../../models/question';
+import { Question } from '../../models/question';
+import { Alternative as AlternativeModel } from '../../models/alternative';
 import { ButtonGroup } from '../../components/Button/styles';
 import { Timer } from '../../components/Timer';
 import { View, Text } from 'react-native';
@@ -11,8 +12,9 @@ import { loadQuestions } from '../../services/questions.service';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { answerQuestion, RootState } from '../../store';
+import { answerQuestion } from '../../redux/quiz-slice/actions';
 import { Container, Title } from './styles';
+import { RootState } from '../../redux/store';
 
 interface SelectItem {
   [x: number] : number;
@@ -30,6 +32,7 @@ export const Quiz: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<SelectItem>({});
   const [index, setIndex] = useState<number>(0);
+  const [imageId, setImageId] = useState<number>(0);
 
   useEffect(() => {
     (async function(){
@@ -38,26 +41,32 @@ export const Quiz: React.FC = () => {
     })()
   },[]);
 
+  //Just to pictures according to IT
+  useEffect(() => {
+    if(imageId > 9){
+      setImageId(0)
+    }
+  },[imageId])
+
   const question = questions[index];
 
   const canGoNext = index + 1 < questions.length;
 
   function nextQuestion() {
       setIndex(index + 1);
+      setImageId(imageId + 1);
   }
 
   function previousQuestion(){
     setIndex(index - 1);
+    setImageId(imageId - 1);
   }
 
   function finishQuiz(){
-    navigation.navigate('Result',{
-      answers
-    });
+    navigation.navigate('Result');
   }
 
   function handleSelectAnswer(alternative: AlternativeModel, alternativeIndex: number){
-    console.log('index1',index);
     dispatch(answerQuestion(alternative, index));
 
     const answer =  {
@@ -79,7 +88,7 @@ export const Quiz: React.FC = () => {
     <View>
       <Timer/>
       <Container>
-      <Img source={{uri: `https://picsum.photos/id/${index}/200/300`}}/>
+      <Img source={{uri: `https://picsum.photos/id/${imageId}/200/300`}}/>
       <Title>{question.question}</Title>
       {question.alternatives.map((alternative, alternativeIndex) => {
         return <Alternative

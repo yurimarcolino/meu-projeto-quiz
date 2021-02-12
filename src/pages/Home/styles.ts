@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { primary, white } from '../../themes';
+import { primary, secondary, white } from '../../themes';
 
 export const Container = styled.View`
   flex: 1;
@@ -11,15 +11,16 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   font-size: 40px;
-  color: ${white};
+  color: ${secondary};
   margin: 64px 0 200px;
 `
 
 export const Text = styled.Text`
-  font-size: 15px;
+  font-size: 22px;
   color: ${white};
-  margin-left: 45px;
+  margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 150px;
-
+  text-align: justify;
+  text-justify: inter-word;
 `

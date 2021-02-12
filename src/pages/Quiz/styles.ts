@@ -13,6 +13,8 @@ export const Title = styled.Text`
   margin-top: 8px;
   margin-bottom: 8px;
   font-size: 16px;
-  font-weight: bold
+  font-weight: bold;
+  text-align: justify;
+  text-justify: inter-word;
 `
 

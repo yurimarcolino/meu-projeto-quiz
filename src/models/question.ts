@@ -1,7 +1,4 @@
-export interface Alternative {
-  content: string,
-  isCorrect: boolean
-}
+import { Alternative } from './alternative'
 
 export interface Question {
   question: string
