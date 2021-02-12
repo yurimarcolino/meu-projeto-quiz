@@ -11,6 +11,7 @@ export const Title = styled.Text`
 
   color: ${white};
   margin-top: 8px;
+  margin-bottom: 8px;
   font-size: 16px;
   font-weight: bold
 `

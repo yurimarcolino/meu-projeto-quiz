@@ -1,10 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
+import { Time, Container } from './styles'
 
 export const Timer: React.FC = () => {
-  const [time, setTime] = useState(20);
+  const [time, setTime] = useState(600);
 
   const navigation = useNavigation();
+
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,7 +27,10 @@ export const Timer: React.FC = () => {
 
   return(
     <>
-      {time}
+      <Container>
+        <Time>{minutes}:{seconds}</Time>
+      </Container>
+
     </>
   )
 }

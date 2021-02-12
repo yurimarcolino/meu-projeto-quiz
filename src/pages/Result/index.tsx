@@ -11,6 +11,7 @@ type ResultProps = StackScreenProps<RootStackParamList, 'Result'>
 export const Result: React.FC<ResultProps> = ({route, navigation}) => {
   const { answers } = route.params;
 
+  //esclarecer duvida sobre correct answer
   const correctAnswers = answers?.filter(answer => answer.isCorrect)?.length;
 
   function navigateToHome(){

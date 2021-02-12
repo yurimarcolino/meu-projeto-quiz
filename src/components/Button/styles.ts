@@ -3,8 +3,8 @@ import styled from 'styled-components/native'
 import { primary, white } from '../../themes';
 
 export const Container = styled(RectButton)`
-  height: 50px;
-  width: 200px;
+  height: 40px;
+  width: 100px;
   background: #ff9000;
   border-radius: 10px;
 
@@ -14,12 +14,13 @@ export const Container = styled(RectButton)`
 
 export const ButtonText = styled.Text`
   color: ${primary};
-  font-size: 18px;
+  font-size: 15px;
+  font-weight: bold;
 `;
 
 export const ButtonGroup = styled.View`
   flex-direction: row;
-  padding: 8px;
+  padding: 20px;
   justify-content: space-between;
 `
 

@@ -9,15 +9,14 @@ import { Container, Text, Title } from './styles'
 
 
 export const Home: React.FC = () => {
-  const [answer, setAnswer] = useState();
   const navigation = useNavigation();
 
   async function loadQuestions(){
     // TODO: create trivia api response
-    const { data: quiz } = await triviaApi.get<TriviaApiResponse>('api.php?amount=3&category=15&difficulty=easy&type=multiple')
+    const { data: quiz } = await triviaApi.get<TriviaApiResponse>('api.php?amount=15&category=18&difficulty=easy&type=multiple')
     return convertToQuestions(quiz)
   }
-
+  //duvida no retorno da funcao e por que foi usado o spread operator
   function convertToQuestions(quiz: TriviaApiResponse){
     return quiz.results.map(result => {
       const incorrectAnswer : Alternative[] = result.incorrect_answers.map(incorrect => {
@@ -53,8 +52,8 @@ export const Home: React.FC = () => {
 
   return(
     <Container>
-      <Title>Quiz</Title>
-      <Text>Desc do quiz</Text>
+      <Title>My Quiz</Title>
+      <Text>You're gonna have 10 minutes to answer 15 questions about computer science. </Text>
       <Button onPress={navigateToQuiz}>Start</Button>
     </Container>
   )

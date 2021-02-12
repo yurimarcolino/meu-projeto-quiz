@@ -22,7 +22,7 @@ export type RootStackParamList = {
 
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
-export const AppStack = () => {
+export const AppStack: React.FC = () => {
   return(
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false}}>

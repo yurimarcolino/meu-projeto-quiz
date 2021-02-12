@@ -8,6 +8,7 @@ import { Container, Title } from './styles';
 import { Alternative as AlternativeModel } from '../../models/question';
 import { ButtonGroup } from '../../components/Button/styles';
 import { Timer } from '../../components/Timer';
+import { View } from 'react-native';
 
 interface SelectItem {
   [x: number] : number;
@@ -19,14 +20,18 @@ export const Quiz: React.FC<QuizProps> = ({ route, navigation }) => {
   const [answers, setAnswers] = useState<AlternativeModel[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<SelectItem>({});
   const [index, setIndex] = useState<number>(0);
-  const { questions } = route.params
-
-  const canGoNext = index + 1 < questions.length;
+  const { questions } = route.params;
 
   const question = questions[index];
 
+  const canGoNext = index + 1 < questions.length;
+
   function nextQuestion() {
       setIndex(index + 1);
+  }
+
+  function previousQuestion(){
+    setIndex(index - 1);
   }
 
   function finishQuiz(){
@@ -34,11 +39,7 @@ export const Quiz: React.FC<QuizProps> = ({ route, navigation }) => {
       answers
     })
   }
-
-  function previousQuestion(){
-    setIndex(index - 1);
-  }
-
+  //duvida nessa funcao sobre a relacao entre os index
   function handleSelectAnswer(alternative: AlternativeModel, alternativeIndex: number){
     const newAnswers = [...answers];
 
@@ -55,15 +56,18 @@ export const Quiz: React.FC<QuizProps> = ({ route, navigation }) => {
   }
 
   return(
-    <Container>
+    <View>
       <Timer/>
+      <Container>
       <Img source={{uri: `https://picsum.photos/id/${index}/200/300`}}/>
       <Title>{question.question}</Title>
       {question.alternatives.map((alternative, alternativeIndex) => {
         return <Alternative
           selected={selectedAnswer[index] === alternativeIndex}
           onPress={() => handleSelectAnswer(alternative, alternativeIndex)}
-          key={alternative.content}>{alternative.content}
+          key={alternative.content}
+        >
+          {alternative.content}
         </Alternative>
       })}
       <ButtonGroup>
@@ -72,5 +76,7 @@ export const Quiz: React.FC<QuizProps> = ({ route, navigation }) => {
         { !canGoNext && <Button enabled={answers.length > 0} onPress={finishQuiz}>Finish</Button>}
       </ButtonGroup>
     </Container>
+    </View>
+
   );
 }
