@@ -1,4 +1,4 @@
-# Desafio empresa Octupus
+# Meu Quiz
 
 ## How to run the project: 
 
