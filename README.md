@@ -22,9 +22,13 @@ yarn && yarn start
 
 ### Home Page
 
+<img src="./src/images/home.jpeg" width=200/>
+
 This page is just the entry point, we won't have anything especial, basically, some instructions for the user and a button to start the game.
 
 ### Quiz Page
+
+<img src="./src/images/quiz.jpeg" width=200/>
 
 This is the core of the entirely application. You're going to be able to : 
   - anserwer the questions.
@@ -37,6 +41,9 @@ This is the core of the entirely application. You're going to be able to :
   
   
 ### Result Page
+  
+  <img src="./src/images/result.jpeg" width=200/>
+
   In the result page you're going to be able to see how many ansewrs you scored and also a button to restart the game.
   
 
