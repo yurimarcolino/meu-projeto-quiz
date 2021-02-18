@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { lighten } from 'polished';
-import { primary, white } from '../../themes'
+import { primary, white } from '../../themes';
 
 interface CustomAlternativeProps {
   selected: boolean

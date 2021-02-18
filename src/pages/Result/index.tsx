@@ -10,7 +10,6 @@ import { clearAnswers } from '../../redux/quiz-slice/actions';
 export const Result: React.FC = () => {
   const dispatch = useDispatch();
   const answers = useSelector((state : RootState) => state.quiz.answers);
-  console.log(answers);
   const navigation = useNavigation();
   const correctAnswers = answers?.filter(answer => answer.isCorrect)?.length;
 

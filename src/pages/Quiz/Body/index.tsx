@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '../../../components/Button';
-import { Img } from '../../../components/Image';
-import { Alternative } from '../../../components/Alternative';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+
 import { Question } from '../../../models/question';
 import { Alternative as AlternativeModel } from '../../../models/alternative';
+
+import { Img } from '../../../components/Image';
+import { Alternative } from '../../../components/Alternative';
+import { Button } from '../../../components/Button';
 import { ButtonGroup } from '../../../components/Button/styles';
+import { Loading } from '../../Loading';
+import { answerQuestion } from '../../../redux/quiz-slice/actions';
+import { RootState } from '../../../redux/store';
+import { Container, Title } from './styles';
 
 import { loadQuestions } from '../../../services/questions.service';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { answerQuestion } from '../../../redux/quiz-slice/actions';
-import { Container, Title } from './styles';
-import { RootState } from '../../../redux/store';
-import { Loading } from '../../Loading';
 
 interface SelectItem {
   [x: number] : number;
@@ -24,7 +25,6 @@ export const Body: React.FC = () => {
 
   const dispatch = useDispatch();
   const answers = useSelector((state : RootState) => {
-    console.log(state);
     return state.quiz.answers;
   });
 

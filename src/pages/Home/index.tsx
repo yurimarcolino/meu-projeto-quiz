@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Button } from '../../components/Button'
+import { Button } from '../../components/Button';
 
-import { Container, Text, Title } from './styles'
+import { Container, Text, Title } from './styles';
 
 export const Home: React.FC = () => {
   const navigation = useNavigation();
